@@ -155,33 +155,33 @@ erDiagram
         string title
         date publication_date
         int publisher_id FK
-        string cover_image NULL
+        string cover_image
         string isbn
     }
     
     SERIES {
         int id PK
         string name
-        boolean is_tracked NULL
-        boolean is_complete NULL
+        boolean is_tracked
+        boolean is_complete
     }
     
     AUTHORS {
         int id PK
         string name
-        boolean is_tracked NULL
+        boolean is_tracked
     }
     
     PUBLISHERS {
         int id PK
         string name
-        boolean is_tracked NULL
+        boolean is_tracked
     }
     
     NARRATORS {
         int id PK
         string name
-        boolean is_tracked NULL
+        boolean is_tracked
     }
     
     GENRE {
@@ -222,7 +222,7 @@ erDiagram
         int id PK
         int book_id FK
         date start_date
-        date end_date NULL
+        date end_date
     }
     
     BOOKS ||--o{ SERIES : "belongs to"
@@ -236,7 +236,6 @@ erDiagram
     BOOKS ||--o{ BOOKAPIREFERENCES : "referenced by"
     BOOKAPIREFERENCES ||--|{ APISOURCES : "uses"
     BOOKS ||--o{ READINGTRACKING : "tracks"
-
 ```
 
 ## 4. Front-End Architecture
