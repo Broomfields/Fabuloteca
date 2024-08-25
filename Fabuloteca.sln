@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabuloteca", "Fabuloteca\Fabuloteca\Fabuloteca.csproj", "{10CA519F-3EBA-41C2-9C72-2ABBE9FBC302}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabuloteca.Client", "Fabuloteca\Fabuloteca.Client\Fabuloteca.Client.csproj", "{D1B2ECDA-B51C-4236-83A8-E3C1EFACE47F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10CA519F-3EBA-41C2-9C72-2ABBE9FBC302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CA519F-3EBA-41C2-9C72-2ABBE9FBC302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CA519F-3EBA-41C2-9C72-2ABBE9FBC302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CA519F-3EBA-41C2-9C72-2ABBE9FBC302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1B2ECDA-B51C-4236-83A8-E3C1EFACE47F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1B2ECDA-B51C-4236-83A8-E3C1EFACE47F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1B2ECDA-B51C-4236-83A8-E3C1EFACE47F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1B2ECDA-B51C-4236-83A8-E3C1EFACE47F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A878863F-5AA9-4A09-B46E-49E722163046}
+	EndGlobalSection
+EndGlobal
