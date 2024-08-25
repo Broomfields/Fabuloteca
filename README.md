@@ -21,11 +21,12 @@ Fabuloteca is designed to cater to the specific needs that have outgrown existin
 - Facilitate future expansion to accommodate evolving needs, ensuring the application remains useful over time.
 
 ---
+
 ## 2. Technology Stack
 
 ### 2.1. Front End
-- **Technology**: .NET MAUI on .NET 8
-- **Reasoning**: .NET MAUI was chosen for its ability to target both iOS and Windows natively. Leveraging .NET 8 ensures access to the latest features and performance improvements. It also utilises the developer's existing C# and .NET expertise, ensuring a streamlined development process.
+- **Technology**: Blazor WebAssembly (.NET 8)
+- **Reasoning**: Blazor WebAssembly on .NET 8 was chosen for its ability to create a responsive, cross-platform web application that can run on any modern browser. This approach eliminates the need for platform-specific deployments, such as iOS, and leverages the developer's existing C# and .NET expertise.
 
 ### 2.2. Back End
 - **Technology**: Entity Framework Core with SQLite on .NET 8
@@ -34,7 +35,6 @@ Fabuloteca is designed to cater to the specific needs that have outgrown existin
 ### 2.3. Version Control
 - **Technology**: Git
 - **Reasoning**: Git is selected for its flexibility and widespread usage. It will be used to manage the project’s source code and documentation, ensuring all changes are tracked and reversible.
-
 
 ---
 
@@ -155,33 +155,33 @@ erDiagram
         string title
         date publication_date
         int publisher_id FK
-        string cover_image
+        string cover_image NULL
         string isbn
     }
     
     SERIES {
         int id PK
         string name
-        boolean is_tracked
-        boolean is_complete
+        boolean is_tracked NULL
+        boolean is_complete NULL
     }
     
     AUTHORS {
         int id PK
         string name
-        boolean is_tracked
+        boolean is_tracked NULL
     }
     
     PUBLISHERS {
         int id PK
         string name
-        boolean is_tracked
+        boolean is_tracked NULL
     }
     
     NARRATORS {
         int id PK
         string name
-        boolean is_tracked
+        boolean is_tracked NULL
     }
     
     GENRE {
@@ -222,15 +222,15 @@ erDiagram
         int id PK
         int book_id FK
         date start_date
-        date end_date
+        date end_date NULL
     }
     
     BOOKS ||--o{ SERIES : "belongs to"
     BOOKS ||--o{ AUTHORS : "written by"
     BOOKS ||--o{ PUBLISHERS : "published by"
     BOOKS ||--o{ NARRATORS : "narrated by"
-    BOOKS ||--o{ GENRE : "categorized as"
-    BOOKS ||--o{ SUBGENRE : "further categorized as"
+    BOOKS ||--o{ GENRE : "categorised as"
+    BOOKS ||--o{ SUBGENRE : "further categorised as"
     BOOKS ||--o{ STORYELEMENTS : "contains"
     BOOKS ||--o{ TONEANDMOOD : "feels like"
     BOOKS ||--o{ BOOKAPIREFERENCES : "referenced by"
@@ -240,10 +240,11 @@ erDiagram
 
 ## 4. Front-End Architecture
 
-### 4.1. .NET MAUI Overview
-- **Cross-Platform Targeting**: Native support for Windows and iOS using .NET 8.
-- **UI Design**: Focus on a responsive and adaptive layout, leveraging XAML for UI components.
-- **Data Binding**: Use of MVVM for binding UI components to data models.
+### 4.1. Blazor WebAssembly Overview
+- **Technology**: Blazor WebAssembly (.NET 8)
+- **Cross-Platform Targeting**: Runs in any modern web browser, eliminating the need for platform-specific deployments.
+- **UI Design**: Focus on a responsive and adaptive layout, leveraging Razor components for UI.
+- **Data Binding**: Use of Blazor’s binding and component model for integrating UI components with data.
 
 ### 4.2. Interaction with Database
 - **Entity Framework Core**: Utilised for data management and querying on .NET 8. Provides a seamless integration with the SQLite database.
@@ -284,72 +285,7 @@ erDiagram
 
 ## 8. References
 
-- **.NET MAUI Documentation**: [https://dotnet.microsoft.com/en-us/learn/maui]
+- **Blazor WebAssembly Documentation**: [https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-8.0]
 - **Entity Framework Core Documentation**: [https://learn.microsoft.com/en-us/ef/core/]
 - **SQLite Documentation**: [https://www.sqlite.org/docs.html]
 - **Git Documentation**: [https://git-scm.com/doc]
-
-## 9. Architecture
-
-### 9.1. System Context Diagram
-
-```mermaid
-C4Context
-    title Fabuloteca System Context
-
-    Person(user, "User", "A person who wants to manage their audiobook collection.")
-    System(fabuloteca, "Fabuloteca", "A personal audiobook management system.")
-
-    Boundary(user_system, "User Interactions") {
-        user -> fabuloteca: "Manage and track books, series, authors, etc."
-        user -> fabuloteca: "View statistics, reports, and trends"
-        user -> fabuloteca: "Configure notifications and settings"
-    }
-
-    System_Ext(ExternalAPI, "External Book APIs", "Provides data on books, authors, and series")
-    fabuloteca <- ExternalAPI: "Fetches book details, updates, and images"
-```
-
-### 9.2. Container Diagram
-
-```mermaid
-C4Container
-    title Fabuloteca Container Diagram
-
-    Person(user, "User", "A person who uses the Fabuloteca app to manage their audiobook collection.")
-    
-    System_Boundary(fabuloteca_boundary, "Fabuloteca Application") {
-        Container_WebApp(web_app, "Fabuloteca UI", "MAUI (.NET 8)", "Cross-platform UI for Windows and iOS")
-        Container_API(api, "Fabuloteca API", "ASP.NET Core (.NET 8)", "Handles business logic and data processing")
-        Container_DB(database, "Fabuloteca Database", "SQLite", "Stores book, author, series, and tracking data")
-    }
-
-    System_Ext(ExternalAPI, "External Book APIs", "Provides data on books, authors, and series")
-
-    user -> web_app: "Uses"
-    web_app -> api: "Sends requests"
-    api -> database: "Reads/Writes data"
-    api -> ExternalAPI: "Fetches data"
-```
-
-### 9.3. Component Diagram (API)
-
-```mermaid
-C4Component
-    title Fabuloteca API Component Diagram
-
-    Container_Boundary(fabuloteca_api, "Fabuloteca API") {
-        Component(auth_service, "Authentication Service", "ASP.NET Core Identity", "Handles user authentication and authorization.")
-        Component(book_service, "Book Service", "C#", "Manages book data and interactions.")
-        Component(series_service, "Series Service", "C#", "Handles series tracking and updates.")
-        Component(reporting_service, "Reporting Service", "C#", "Generates monthly and yearly reports.")
-        Component(notification_service, "Notification Service", "C#", "Sends notifications about upcoming books.")
-        Component(api_controller, "API Controller", "ASP.NET Core", "Exposes API endpoints to the UI.")
-    }
-
-    api_controller -> auth_service: "Handles user authentication"
-    api_controller -> book_service: "Manages book-related requests"
-    api_controller -> series_service: "Manages series tracking"
-    api_controller -> reporting_service: "Requests reports"
-    api_controller -> notification_service: "Sends notifications"
-```
